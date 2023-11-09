@@ -5,7 +5,7 @@ import ProtectedRouteOne from './protected/ProtectedRouteOne'
 import TopNavBar from '../components/common/TopNavBar'
 import SideNavBar from '../components/common/SideNavBar'
 // import Footer from '../components/common/Footer'
-import ManageEmployees from '../pages/management/ManageEmployees'
+import ManageDepartment from '../pages/management/ManageDepartment'
 import AllEmployee from '../pages/management/AllEmployee'
 import EmployeeDetails from '../pages/employee/EmployeeDetails'
 import Department from '../pages/management/Department'
@@ -23,7 +23,7 @@ const AppRoute = () => {
                 </Route>
                 <Route element={<ManagerAccess />}>
                     <Route path='/edit-employee/:e_id' element={<EditEmployee />} />
-                    <Route path='/manage-employee' element={<ManageEmployees />} />
+                    <Route path='/manage-department' element={<ManageDepartment />} />
                     <Route path='/departments' element={<Department />} />
                 </Route>
                 <Route path='/all-employee' element={<AllEmployee />} />

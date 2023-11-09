@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { addDepartment, allDepartment, deleteDepartment, updateDepartment } from '../../services/slices/UtilitySlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-const ManageEmployees = () => {
+const ManageDepartment = () => {
   // header
   const header = {
     headers: {
@@ -207,4 +207,4 @@ const ManageEmployees = () => {
   )
 }
 
-export default ManageEmployees
+export default ManageDepartment

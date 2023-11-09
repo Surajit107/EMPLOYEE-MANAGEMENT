@@ -20,7 +20,7 @@ const SideNavBar = () => {
             </Link>
             <ul id="components-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
               <li>
-                <Link to="/manage-employee">
+                <Link to="/manage-department">
                   <i className="bi bi-circle"></i><span>Manage Departments</span>
                 </Link>
               </li>
