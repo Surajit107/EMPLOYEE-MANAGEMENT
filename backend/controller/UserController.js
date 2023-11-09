@@ -93,12 +93,16 @@ exports.userLogin = async (req, res) => {
 
 // add-department (CREATE)
 exports.addDepartment = async (req, res) => {
-    // console.log(req.body);
-    // return;
     const { department_name } = req.body;
     try {
         if (!department_name) {
             return res.status(203).json({ message: 'Missing required fields' });
+        }
+
+        // Check if the department name already exists in the database
+        const existingDepartment = await DepartmentModel.findOne({ department_name: { $regex: new RegExp(department_name, "i") } });
+        if (existingDepartment) {
+            return res.status(203).json({ success: false, message: 'Department name already exists' });
         }
 
         const newDepartment = new DepartmentModel({
@@ -113,6 +117,7 @@ exports.addDepartment = async (req, res) => {
         return res.status(500).json({ success: false, message: 'Internal server error' });
     }
 }
+
 
 
 // get-all-department (READ)
