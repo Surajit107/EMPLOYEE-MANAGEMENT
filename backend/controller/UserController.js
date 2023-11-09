@@ -98,26 +98,31 @@ exports.addDepartment = async (req, res) => {
         if (!department_name) {
             return res.status(203).json({ message: 'Missing required fields' });
         }
-
         // Check if the department name already exists in the database
-        const existingDepartment = await DepartmentModel.findOne({ department_name: { $regex: new RegExp(department_name, "i") } });
+        let existingDepartment = await DepartmentModel.findOne({ department_name: { $regex: new RegExp(department_name, "i") } });
+
         if (existingDepartment) {
-            return res.status(203).json({ success: false, message: 'Department name already exists' });
+            if (existingDepartment.isDeleted) {
+                existingDepartment.isDeleted = false;
+                await existingDepartment.save();
+                return res.status(200).json({ success: true, message: 'Department added successfully' });
+            } else {
+                return res.status(203).json({ success: false, message: 'Department name already exists' });
+            }
+        } else {
+            const newDepartment = new DepartmentModel({
+                department_name,
+                isDeleted: false
+            });
+
+            await newDepartment.save();
+            return res.status(201).json({ success: true, message: 'Department added successfully' });
         }
-
-        const newDepartment = new DepartmentModel({
-            department_name,
-            isDeleted: false
-        });
-
-        await newDepartment.save();
-        return res.status(201).json({ success: true, message: 'Department added successfully' });
 
     } catch (err) {
         return res.status(500).json({ success: false, message: 'Internal server error' });
     }
 }
-
 
 
 // get-all-department (READ)
