@@ -87,8 +87,8 @@ const AllEmployee = () => {
                                                 return (
                                                     <li className="list-group-item d-flex justify-content-between align-items-start" key={item?._id}>
                                                         <div className="ms-2 me-auto">
-                                                            <div className="fw-bold">{item?.full_name}</div>
-                                                            {item?.location_city}
+                                                            <div className="fw-bold">Name: {item?.full_name}</div>
+                                                            Location: {item?.location_city}
                                                         </div>
                                                         {
                                                             USER_TYPE === "admin" ?
