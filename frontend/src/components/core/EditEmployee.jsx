@@ -70,7 +70,7 @@ const EditEmployee = () => {
             <main id="main" className="main">
 
                 <div className="pagetitle">
-                    <h1>Profile</h1>
+                    <h1>Employee Profile</h1>
                     <nav>
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><Link to="/">Home</Link></li>

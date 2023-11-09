@@ -10,11 +10,11 @@ const EmployeeDetails = () => {
             <main id="main" className="main">
 
                 <div className="pagetitle">
-                    <h1>Profile</h1>
+                    <h1>My Profile</h1>
                     <nav>
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                            <li className="breadcrumb-item active">Profile</li>
+                            <li className="breadcrumb-item active">My Profile</li>
                         </ol>
                     </nav>
                 </div>
