@@ -63,12 +63,12 @@ exports.userLogin = async (req, res) => {
         }
 
         const existingUser = await UserModel.findOne({ email: email });
-        const existingDepartment = await DepartmentModel.findOne({ _id: existingUser.department });
 
 
         if (!existingUser) {
             return res.status(203).json({ success: false, message: "User Not Found" });
         } else {
+            const existingDepartment = await DepartmentModel.findOne({ _id: existingUser.department });
             const USERDATA = {
                 id: existingUser._id,
                 full_name: existingUser.full_name,
@@ -204,7 +204,7 @@ exports.updateUserDepartment = async (req, res) => {
     const user_Id = req.params.id;
     try {
         if (!(full_name && email && location_city && department)) {
-            return res.status(203).json({ success: false, message: "All Fields Are required" });
+            return res.status(203).json({ success: false, message: "All Fields Are required. Please Select A Department" });
         }
 
         const existingUser = await UserModel.findById({ _id: user_Id });

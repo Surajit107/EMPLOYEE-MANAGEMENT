@@ -68,9 +68,6 @@ const AuthSlice = createSlice({
         doLogOut: (state) => {
             window.localStorage.clear();
             state.token = "";
-            toast.success("Logged Out Successfully", {
-                autoClose: 3500
-            })
         },
         clearAuthError: (state) => {
             state.error = null;
