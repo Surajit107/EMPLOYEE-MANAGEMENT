@@ -2,10 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { allDepartment, allEmployee } from '../../services/slices/UtilitySlice';
+import Loader from '../../util/Loader';
 
 const Department = () => {
     const dispatch = useDispatch();
-    const { employee_data, department_data } = useSelector(state => state.utilitySlice);
+    const { employee_data, department_data, loading } = useSelector(state => state.utilitySlice);
     const [structuredData, setStructuredData] = useState([]);
 
 
@@ -41,6 +42,9 @@ const Department = () => {
 
     return (
         <>
+            {/* Loader */}
+            {loading && <Loader />}
+
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>Departmet</h1>

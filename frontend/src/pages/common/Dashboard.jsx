@@ -2,10 +2,11 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { allEmployee } from '../../services/slices/UtilitySlice';
 import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../../util/Loader';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
-    const { employee_data } = useSelector(state => state.utilitySlice);
+    const { employee_data, loading } = useSelector(state => state.utilitySlice);
 
     // Componenet mount life cycle
     useEffect(() => {
@@ -14,6 +15,9 @@ const Dashboard = () => {
 
     return (
         <>
+            {/* Loader */}
+            {loading && <Loader />}
+
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>Dashboard</h1>

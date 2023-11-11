@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 import { userSignup } from '../../services/slices/AuthSlice';
+import Loader from '../../util/Loader';
 
 const Signup = () => {
 
@@ -14,6 +15,7 @@ const Signup = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading } = useSelector(state => state.authSlice);
 
   // handleChange func.
   const handleChange = (e) => {
@@ -35,6 +37,9 @@ const Signup = () => {
 
   return (
     <>
+      {/* Loader */}
+      {loading && <Loader />}
+
       <main>
         <div className="container">
 

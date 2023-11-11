@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { addDepartment, allDepartment, deleteDepartment, updateDepartment } from '../../services/slices/UtilitySlice';
 import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../../util/Loader';
 
 const ManageDepartment = () => {
   // header
@@ -16,7 +17,7 @@ const ManageDepartment = () => {
   const [updateFormValues, setupdateFormValues] = useState([]);
 
   const dispatch = useDispatch();
-  const { department_data } = useSelector(state => state.utilitySlice);
+  const { department_data, loading } = useSelector(state => state.utilitySlice);
 
 
   //  handleEdit function.
@@ -86,6 +87,9 @@ const ManageDepartment = () => {
 
   return (
     <>
+      {/* Loader */}
+      {loading && <Loader />}
+
       <main id="main" className="main">
         <div className="pagetitle">
           <h1>Management</h1>

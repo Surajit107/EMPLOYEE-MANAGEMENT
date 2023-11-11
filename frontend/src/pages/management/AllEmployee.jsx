@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { allEmployee, filterLocation, filterName } from '../../services/slices/UtilitySlice';
 import Pagination from '../../util/Pagination';
+import Loader from '../../util/Loader';
 
 const AllEmployee = () => {
     // logged in user
@@ -12,7 +13,7 @@ const AllEmployee = () => {
     const [employeeData, setEmployeeData] = useState(null);
 
     const dispatch = useDispatch();
-    const { employee_data } = useSelector(state => state.utilitySlice);
+    const { employee_data, loading } = useSelector(state => state.utilitySlice);
 
     // pagination
     const userPerPage = 5;
@@ -38,6 +39,9 @@ const AllEmployee = () => {
 
     return (
         <>
+            {/* Loader */}
+            {loading && <Loader />}
+
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1>Employees</h1>

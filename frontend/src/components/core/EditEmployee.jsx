@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { allDepartment, updateUserDepartment } from '../../services/slices/UtilitySlice';
+import Loader from '../../util/Loader';
 
 const EditEmployee = () => {
     // header
@@ -29,7 +30,7 @@ const EditEmployee = () => {
     });
 
     const dispatch = useDispatch();
-    const { department_data } = useSelector(state => state.utilitySlice);
+    const { department_data, loading } = useSelector(state => state.utilitySlice);
 
     // handleChange function
     const handleChange = (e) => {
@@ -67,6 +68,9 @@ const EditEmployee = () => {
 
     return (
         <>
+            {/* Loader */}
+            {loading && <Loader />}
+
             <main id="main" className="main">
 
                 <div className="pagetitle">

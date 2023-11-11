@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { userLogin } from '../../services/slices/AuthSlice';
+import Loader from '../../util/Loader';
 
 const Login = () => {
     const token = JSON.parse(window.localStorage.getItem("token"));
@@ -12,6 +13,7 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { loading } = useSelector(state => state.authSlice);
 
     // handleChange func.
     const handleChange = (e) => {
@@ -38,6 +40,9 @@ const Login = () => {
 
     return (
         <>
+            {/* Loader */}
+            {loading && <Loader />}
+
             <main>
                 <div className="container">
 
