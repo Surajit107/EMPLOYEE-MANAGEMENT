@@ -12,11 +12,6 @@ const TopNavBar = () => {
     const USER = JSON.parse(window.localStorage.getItem("user"));
     const TOKEN = JSON.parse(window.localStorage.getItem("token"));
 
-    // decode jwt token
-    const decodedJwt = jwtDecode(TOKEN);
-    const isExpired = decodedJwt.exp < Date.now() / 1000;
-    console.log(isExpired);
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -30,15 +25,22 @@ const TopNavBar = () => {
     // Componenet mount cycle
     useEffect(() => {
         // Check your session and logout after it's expired.
-        if (isExpired) {
-            dispatch(doLogOut());
+        if (TOKEN) {
+            // decode jwt token
+            const decodedJwt = jwtDecode(TOKEN);
+            const isExpired = decodedJwt.exp < Date.now() / 1000;
+            if (isExpired) {
+                dispatch(doLogOut());
+                navigate('/login');
+                // react toast message
+                toast.success("Your Session Has Expired Please Login To Continue", {
+                    autoClose: 4500
+                });
+            }
+        } else {
             navigate('/login');
-            // react toast message
-            toast.success("Your Session Has Expired Please Login To Continue", {
-                autoClose: 4500
-            });
         }
-    }, [isExpired, dispatch, navigate]);
+    }, [dispatch, navigate, TOKEN]);
 
 
     return (
