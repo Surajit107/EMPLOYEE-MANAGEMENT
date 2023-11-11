@@ -67,6 +67,8 @@ const Signup = () => {
                             name="full_name"
                             className="form-control"
                             id="full_name"
+                            pattern="[A-Za-z\s]+"
+                            title="Please enter only alphabetic characters and spaces"
                             value={formValues?.full_name}
                             onChange={handleChange}
                           />
