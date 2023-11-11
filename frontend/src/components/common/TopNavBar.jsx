@@ -1,12 +1,21 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { doLogOut } from '../../services/slices/AuthSlice'
+import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { doLogOut } from '../../services/slices/AuthSlice';
+import { jwtDecode } from 'jwt-decode';
+import { toast } from 'react-toastify';
+
 
 const TopNavBar = () => {
-    // logged in user
+    // logged in user & token
     const USER = JSON.parse(window.localStorage.getItem("user"));
+    const TOKEN = JSON.parse(window.localStorage.getItem("token"));
+
+    // decode jwt token
+    const decodedJwt = jwtDecode(TOKEN);
+    const isExpired = decodedJwt.exp < Date.now() / 1000;
+    console.log(isExpired);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -14,8 +23,23 @@ const TopNavBar = () => {
     // logout func.
     const LOGOUT = () => {
         dispatch(doLogOut());
-        navigate('/');
+        navigate('/login');
     }
+
+
+    // Componenet mount cycle
+    useEffect(() => {
+        // Check your session and logout after it's expired.
+        if (isExpired) {
+            dispatch(doLogOut());
+            navigate('/login');
+            // react toast message
+            toast.success("Your Session Has Expired Please Login To Continue", {
+                autoClose: 4500
+            });
+        }
+    }, [isExpired, dispatch, navigate]);
+
 
     return (
         <>
